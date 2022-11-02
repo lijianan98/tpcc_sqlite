@@ -8,7 +8,7 @@
 #include <string.h>
 #include <time.h>
 
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 #include "spt_proc.h"
 #include "tpc.h"

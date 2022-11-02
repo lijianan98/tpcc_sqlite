@@ -16,7 +16,7 @@
 #include <time.h>
 #include <fcntl.h>
 
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 #include "spt_proc.h"
 #include "tpc.h"
@@ -31,6 +31,10 @@ sqlite3_stmt* stmt[11];
 char            timestamp[81];
 long            count_ware;
 int             fd, seed;
+
+int n_db_on_pmem=0;
+char *pmem_location;
+char *ssd_location;
 
 int             particle_flg = 0; /* "1" means particle mode */
 int             part_no = 0; /* 1:items 2:warehouse 3:customer 4:orders */
@@ -84,10 +88,25 @@ main(argc, argv)
 	printf("*** TPCC-sqlite3 Data Loader        ***\n");
 	printf("*************************************\n");
 
-  /* Parse args */
+        n_db_on_pmem = 0;
+        pmem_location = "/mnt/pmem0/databases";
+        ssd_location = "/home/mania/databases";
+    /* Parse args */
 
-    while ( (c = getopt(argc, argv, "w:l:m:n:d:")) != -1) {
+    while ( (c = getopt(argc, argv, "p:s:c:w:l:m:n:d:")) != -1) {
         switch (c) {
+	case 'p':
+	    printf ("option p with value '%s'\n", optarg);
+            pmem_location = optarg;
+            break;
+	case 's':
+	    printf ("option s with value '%s'\n", optarg);
+            ssd_location = optarg;
+            break;
+        case 'c':
+            printf ("option  n with value '%s'\n", optarg);
+            n_db_on_pmem = atoi(optarg);
+            break;
         case 'w':
             printf ("option w with value '%s'\n", optarg);
             count_ware = atoi(optarg);
@@ -109,7 +128,12 @@ main(argc, argv)
             printf ("option d with value '%s'\n", optarg);
             db_path = optarg;
             break;
-        case '?':
+        /*case 'i':
+                printf("option i(MAXITEMS #) with value '%s'\n", optarg);
+                MAXITEMS = atoi(optarg);
+		break;
+        */
+	case '?':
     	    printf("Usage: tpcc_load -w warehouses -m min_wh -n max_wh\n");
     	    printf("* [part]: 1=ITEMS 2=WAREHOUSE 3=CUSTOMER 4=ORDERS\n");
             exit(0);
@@ -158,6 +182,25 @@ main(argc, argv)
     /* EXEC SQL WHENEVER SQLERROR GOTO Error_SqlCall; */
 
     sqlite3_open(db_path, &sqlite);
+
+        /** 
+         * attach tpcc.db_backup as backup
+         */
+    int n_databases = 9;
+    char attach_db[60];
+
+    for(int i = 0; i < n_db_on_pmem; i++) {
+       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", pmem_location, i, i);
+       sqlite3_exec(sqlite, attach_db, 0, 0, 0);
+    }
+    
+    for(int i =n_db_on_pmem; i < n_databases; i++) {
+       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", ssd_location, i, i);
+       sqlite3_exec(sqlite, attach_db, 0, 0, 0);
+    }
+
+  
+    //sqlite3_exec(sqlite, "attach database '/home/mania/tpcc.db_backup' as backup;", 0, 0, 0);
     if(!sqlite) {
 	    printf("%s: Failed to open DB\n", __func__);
     }
@@ -360,6 +403,9 @@ retry:
 
 	/* EXEC SQL COMMIT WORK; */
 	if( sqlite3_exec(sqlite, "COMMIT;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
+	
+	/* END TRANSACTION*/
+	//if ( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
 	printf("Item Done. \n");
 	return;
@@ -445,6 +491,8 @@ LoadWare()
 		/* EXEC SQL COMMIT WORK; */
 		if( sqlite3_exec(sqlite, "COMMIT;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
+		/* END TRANSACTION*/
+        	//if ( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 	}
 
 	return;
@@ -476,6 +524,9 @@ LoadCust()
 	/* EXEC SQL COMMIT WORK;*/	/* Just in case */
 	if( sqlite3_exec(sqlite, "COMMIT;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
+	/* END TRANSACTION*/
+        //if ( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
+
 	return;
 sqlerr:
 	Error(0);
@@ -505,6 +556,9 @@ LoadOrd()
 
 	/* EXEC SQL COMMIT WORK; */	/* Just in case */
 	if( sqlite3_exec(sqlite, "COMMIT;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
+
+	/* END TRANSACTION*/
+        //if ( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
 	return;
 sqlerr:
@@ -542,7 +596,7 @@ Stock(w_id)
 	int             orig[MAXITEMS+1];
 	int             pos;
 	int             i;
-	int             error;
+	int             error = 0;
 	sqlite3_stmt* sqlite_stmt;
 
 	/* EXEC SQL WHENEVER SQLERROR GOTO sqlerr;*/
@@ -632,6 +686,7 @@ retry:
 
 	printf(" Stock Done.\n");
 out:
+	printf("debug Stock function, error = %d\n", error);
 	return error;
 sqlerr:
     Error(0);
@@ -661,7 +716,7 @@ District(w_id)
 	float           d_tax;
 	float           d_ytd;
 	int             d_next_o_id;
-	int             error;
+	int             error = 0;
 	sqlite3_stmt* sqlite_stmt;
 
 	/* EXEC SQL WHENEVER SQLERROR GOTO sqlerr;*/
@@ -670,6 +725,7 @@ District(w_id)
 	d_w_id = w_id;
 	d_ytd = 30000.0;
 	d_next_o_id = 3001L;
+
 retry:
 	for (d_id = 1; d_id <= DIST_PER_WARE; d_id++) {
 
@@ -687,7 +743,9 @@ retry:
 				       :d_tax,:d_ytd,:d_next_o_id);*/
 
 		sqlite_stmt = stmt[3];
-
+//
+		//printf("District prepares to bind\n");
+//
 		sqlite3_bind_int64(sqlite_stmt, 1, d_id);
 		sqlite3_bind_int64(sqlite_stmt, 2, d_w_id);
 		sqlite3_bind_text(sqlite_stmt, 3, d_name, -1, SQLITE_STATIC);
@@ -710,7 +768,7 @@ retry:
 
 	}
 	
-	printf(" Stock Done.\n");
+	printf(" District Done. error = %d\n", error);
 out:
 	return error;
 sqlerr:
@@ -764,6 +822,9 @@ retry:
     if (retried)
         printf("Retrying ...\n");
     retried = 1;
+
+    /* END TRANSACTION */
+    //if( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
     //if( sqlite3_exec(sqlite, "BEGIN TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
@@ -875,6 +936,10 @@ retry:
     /* EXEC SQL COMMIT WORK; */
     //if( mysql_commit(mysql) ) goto sqlerr;
     //if( sqlite3_exec(sqlite, "COMMIT;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
+    
+    /* END TRANSACTION */
+    //if( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
+    
     printf("Customer Done.\n");
 
     return;

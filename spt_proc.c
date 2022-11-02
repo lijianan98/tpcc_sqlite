@@ -3,7 +3,7 @@
  * support routines for the proc tpcc implementation
  */
 
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 #include <stdio.h>
 

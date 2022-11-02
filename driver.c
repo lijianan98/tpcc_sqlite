@@ -12,7 +12,7 @@
 #include "sequence.h"
 #include "rthist.h"
 #include "sb_percentile.h"
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 static int other_ware (int home_ware);
 static int do_neword (int t_num);
@@ -468,9 +468,11 @@ static int do_slev (int t_num)
 	hist_inc(4, rt );
 	if(counting_on){
 	  if( rt < rt_limit[4]){
+	    //printf("Stock level query, rt < rt_limit[4], rt = %lf\n", rt);
 	    success[4]++;
 	    success2[4][t_num]++;
 	  }else{
+	    //printf("Stock level query, rt >= rt_limit[4], rt = %lf\n", rt);
 	    late[4]++;
 	    late2[4][t_num]++;
 	  }

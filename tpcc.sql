@@ -1,8 +1,19 @@
-PRAGMA foreign_keys = ON;
+PRAGMA foreign_keys = O;
+attach database '/tpcc.0.db_backup' as backup0;
+attach database '/tpcc.1.db_backup' as backup1;
+attach database '/tpcc.2.db_backup' as backup2;
+attach database '/tpcc.3.db_backup' as backup3;
+attach database '/tpcc.4.db_backup' as backup4;
+attach database '/tpcc.5.db_backup' as backup5;
+attach database '/tpcc.6.db_backup' as backup6;
+attach database '/tpcc.7.db_backup' as backup7;
+attach database '/tpcc.8.db_backup' as backup8;
+attach database '/tpcc.9.db_backup' as backup9;
+
 
 drop table if exists warehouse;
 
-create table warehouse (
+create table backup0.warehouse (
 w_id smallint not null,
 w_name varchar(10), 
 w_street_1 varchar(20), 
@@ -16,7 +27,7 @@ PRIMARY KEY(w_id) );
 
 drop table if exists district;
 
-create table district (
+create table backup1.district (
 d_id tinyint not null, 
 d_w_id smallint not null, 
 d_name varchar(10), 
@@ -33,7 +44,7 @@ FOREIGN KEY(d_w_id) REFERENCES warehouse(w_id));
 
 drop table if exists customer;
 
-create table customer (
+create table backup2.customer (
 c_id int not null, 
 c_d_id tinyint not null,
 c_w_id smallint not null, 
@@ -60,7 +71,7 @@ FOREIGN KEY(c_d_id, c_w_id) REFERENCES district(d_id, d_w_id));
 
 drop table if exists history;
 
-create table history (
+create table backup3.history (
 h_c_id int, 
 h_c_d_id tinyint, 
 h_c_w_id smallint,
@@ -74,7 +85,7 @@ FOREIGN KEY(h_d_id, h_w_id) REFERENCES district(d_id, d_w_id));
 
 drop table if exists orders;
 
-create table orders (
+create table backup4.orders (
 o_id int not null, 
 o_d_id tinyint not null, 
 o_w_id smallint not null,
@@ -88,7 +99,7 @@ FOREIGN KEY(o_c_id, o_d_id, o_w_id) REFERENCES customer(c_id, c_d_id, c_w_id));
 
 drop table if exists new_orders;
 
-create table new_orders (
+create table backup5.new_orders (
 no_o_id int not null,
 no_d_id tinyint not null,
 no_w_id smallint not null,
@@ -97,7 +108,7 @@ FOREIGN KEY(no_o_id, no_d_id, no_w_id) REFERENCES orders(o_id, o_d_id, o_w_id));
 
 drop table if exists order_line;
 
-create table order_line ( 
+create table backup6.order_line ( 
 ol_o_id int not null, 
 ol_d_id tinyint not null,
 ol_w_id smallint not null,
@@ -114,7 +125,7 @@ FOREIGN KEY(ol_i_id, ol_supply_w_id) REFERENCES stock(s_i_id, s_w_id));
 
 drop table if exists item;
 
-create table item (
+create table backup7.item (
 i_id int not null, 
 i_im_id int, 
 i_name varchar(24), 
@@ -124,7 +135,7 @@ PRIMARY KEY(i_id));
 
 drop table if exists stock;
 
-create table stock (
+create table backup8.stock (
 s_i_id int not null, 
 s_w_id smallint not null, 
 s_quantity smallint, 
@@ -146,7 +157,7 @@ PRIMARY KEY(s_i_id,s_w_id),
 FOREIGN KEY(s_w_id) REFERENCES warehouse(w_id),
 FOREIGN KEY(s_i_id) REFERENCES item(i_id));
 
-CREATE INDEX idx_customer ON customer (c_w_id, c_d_id, c_last, c_first);
-CREATE INDEX idx_orders ON orders (o_w_id, o_d_id, o_c_id, o_id);
+CREATE INDEX backup2.idx_customer ON customer (c_w_id, c_d_id, c_last, c_first);
+CREATE INDEX backup4.idx_orders ON orders (o_w_id, o_d_id, o_c_id, o_id);
 
 PRAGMA foreign_keys = ON;

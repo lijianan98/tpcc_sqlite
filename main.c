@@ -13,7 +13,7 @@
 #include <fcntl.h>
 #include <time.h>
 
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 #include "tpc.h"
 #include "trans_if.h"
@@ -37,6 +37,11 @@ int measure_time;
 int num_node; /* number of servers that consists of cluster i.e. RAC (0:normal mode)*/
 #define NUM_NODE_MAX 8
 char node_string[NUM_NODE_MAX][DB_STRING_MAX];
+
+int n_db_on_pmem=0;
+char *pmem_location;
+char *ssd_location;
+
 
 int time_count;
 int PRINT_INTERVAL=10;
@@ -155,13 +160,27 @@ int main( int argc, char *argv[] )
   num_node = 0;
   arg_offset = 0;
 
-
+  n_db_on_pmem = 0;
+  pmem_location = "/mnt/pmem0/databases";
+  ssd_location = "/home/mania/databases";
   clk_tck = sysconf(_SC_CLK_TCK);
 
   /* Parse args */
 
-    while ( (c = getopt(argc, argv, "w:c:r:l:i:m:o:t:d:0:1:2:3:4:")) != -1) {
+    while ( (c = getopt(argc, argv, "n:s:p:w:c:r:l:i:m:o:t:d:0:1:2:3:4:")) != -1) {
         switch (c) {
+	case 'p':
+	    printf ("option p with value '%s'\n", optarg);
+            pmem_location = optarg;
+            break;
+	case 's':
+	    printf ("option s with value '%s'\n", optarg);
+            ssd_location = optarg;
+            break;
+        case 'n':
+            printf ("option  n with value '%s'\n", optarg);
+            n_db_on_pmem = atoi(optarg);
+            break;
         case 'w':
             printf ("option w with value '%s'\n", optarg);
             num_ware = atoi(optarg);
@@ -560,6 +579,7 @@ int main( int argc, char *argv[] )
   }else{
     printf(" [NG] *\n");
   }
+  printf("success[4] = %d, late[4] = %d\n", success[4], late[4]);
 
   printf("\n<TpmC>\n");
   f = (float)(success[0] + late[0]) * 60.0
@@ -676,6 +696,23 @@ int thread_main (thread_arg* arg)
   /* exec sql connect :connect_string; */
   printf("%s: opening db, thread id = %lu\n", __func__, pthread_self());
   sqlite3_open(db_path, &sqlite3_db);
+  /* attach backup database */
+  //sqlite3_exec(sqlite3_db, "attach database '/home/mania/tpcc.db_backup' as backup;", 0, 0, 0);
+
+  int n_databases = 9;
+  char attach_db[60];
+
+    for(int i = 0; i < n_db_on_pmem; i++) {
+       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", pmem_location, i, i);
+       sqlite3_exec(sqlite3_db, attach_db, 0, 0, 0);
+    }
+    
+    for(int i =n_db_on_pmem; i < n_databases; i++) {
+       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", ssd_location, i, i);
+       sqlite3_exec(sqlite3_db, attach_db, 0, 0, 0);
+    }
+
+
   printf("%s: opened db, thread id = %lu\n", __func__, pthread_self());
 
   sqlite3_exec(sqlite3_db, "PRAGMA journal_mode = OFF;", 0, 0, 0);

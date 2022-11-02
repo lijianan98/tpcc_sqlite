@@ -8,10 +8,11 @@
 #include <stdio.h>
 #include <time.h>
 
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 #include "spt_proc.h"
 #include "tpc.h"
+#include <stdlib.h>
 
 extern sqlite3 **ctx;
 extern sqlite3_stmt ***stmt;
