@@ -231,11 +231,11 @@ int neword( int t_num,
 		ol_num_seq[i]=i;
 	}
 	for (i = 0; i < (o_ol_cnt - 1); i++) {
-		tmp = (MAXITEMS + 1) * supware[ol_num_seq[i]] + itemid[ol_num_seq[i]];
+		tmp = (max_items + 1) * supware[ol_num_seq[i]] + itemid[ol_num_seq[i]];
 		min_num = i;
 		for ( j = i+1; j < o_ol_cnt; j++) {
-		  if ( (MAXITEMS + 1) * supware[ol_num_seq[j]] + itemid[ol_num_seq[j]] < tmp ){
-		    tmp = (MAXITEMS + 1) * supware[ol_num_seq[j]] + itemid[ol_num_seq[j]];
+		  if ( (max_items + 1) * supware[ol_num_seq[j]] + itemid[ol_num_seq[j]] < tmp ){
+		    tmp = (max_items + 1) * supware[ol_num_seq[j]] + itemid[ol_num_seq[j]];
 		    min_num = j;
 		  }
 		}

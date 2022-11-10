@@ -116,8 +116,8 @@ static int do_neword (int t_num)
     struct timespec tbuf2;
     int  w_id, d_id, c_id, ol_cnt;
     int  all_local = 1;
-    int  notfound = MAXITEMS+1;  /* valid item ids are numbered consecutively
-				    [1..MAXITEMS] */
+    int  notfound = max_items+1;  /* valid item ids are numbered consecutively
+				    [1..max_items] */
     int rbk;
     int  itemid[MAX_NUM_ITEMS];
     int  supware[MAX_NUM_ITEMS];
@@ -130,14 +130,14 @@ static int do_neword (int t_num)
 	w_id = RandomNumber(1 + (num_ware * c_num)/num_node,
 			    (num_ware * (c_num + 1))/num_node);
     }
-    d_id = RandomNumber(1, DIST_PER_WARE);
+    d_id = RandomNumber(1, dist_per_ware);
     c_id = NURand(1023, 1, CUST_PER_DIST);
 
     ol_cnt = RandomNumber(5, 15);
     rbk = RandomNumber(1, 100);
 
     for (i = 0; i < ol_cnt; i++) {
-	itemid[i] = NURand(8191, 1, MAXITEMS);
+	itemid[i] = NURand(8191, 1, max_items);
 	if ((i == ol_cnt - 1) && (rbk == 1)) {
 	    itemid[i] = notfound;
 	}
@@ -231,7 +231,7 @@ static int do_payment (int t_num)
 	w_id = RandomNumber(1 + (num_ware * c_num)/num_node,
 			    (num_ware * (c_num + 1))/num_node);
     }
-    d_id = RandomNumber(1, DIST_PER_WARE);
+    d_id = RandomNumber(1, dist_per_ware);
     c_id = NURand(1023, 1, CUST_PER_DIST); 
     Lastname(NURand(255,0,999), c_last); 
     h_amount = RandomNumber(1,5000);
@@ -245,7 +245,7 @@ static int do_payment (int t_num)
         c_d_id = d_id;
     }else{
         c_w_id = other_ware(w_id);
-        c_d_id = RandomNumber(1, DIST_PER_WARE);
+        c_d_id = RandomNumber(1, dist_per_ware);
     }
 
     clk1 = clock_gettime(CLOCK_MONOTONIC, &tbuf1 );
@@ -312,7 +312,7 @@ static int do_ordstat (int t_num)
 	w_id = RandomNumber(1 + (num_ware * c_num)/num_node,
 			    (num_ware * (c_num + 1))/num_node);
     }
-    d_id = RandomNumber(1, DIST_PER_WARE);
+    d_id = RandomNumber(1, dist_per_ware);
     c_id = NURand(1023, 1, CUST_PER_DIST); 
     Lastname(NURand(255,0,999), c_last); 
     if (RandomNumber(1, 100) <= 60) {
@@ -451,7 +451,7 @@ static int do_slev (int t_num)
 	w_id = RandomNumber(1 + (num_ware * c_num)/num_node,
 			    (num_ware * (c_num + 1))/num_node);
     }
-    d_id = RandomNumber(1, DIST_PER_WARE); 
+    d_id = RandomNumber(1, dist_per_ware); 
     level = RandomNumber(10, 20); 
 
       clk1 = clock_gettime(CLOCK_MONOTONIC, &tbuf1 );

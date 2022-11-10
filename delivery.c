@@ -44,7 +44,7 @@ int delivery( int t_num,
 	/* For each district in warehouse */
 	/* printf("W: %d\n", w_id); */
 
-	for (d_id = 1; d_id <= DIST_PER_WARE; d_id++) {
+	for (d_id = 1; d_id <= dist_per_ware; d_id++) {
 	        proceed = 1;
 		/*EXEC_SQL SELECT COALESCE(MIN(no_o_id),0) INTO :no_o_id
 		                FROM new_orders

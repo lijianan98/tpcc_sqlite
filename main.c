@@ -22,6 +22,9 @@
 #include "rthist.h"
 #include "sb_percentile.h"
 
+int max_items = 100000;
+int dist_per_ware = 10;
+
 /* Global SQL Variables */
 sqlite3 **ctx;
 sqlite3_stmt ***stmt;
@@ -167,7 +170,7 @@ int main( int argc, char *argv[] )
 
   /* Parse args */
 
-    while ( (c = getopt(argc, argv, "n:s:p:w:c:r:l:i:m:o:t:d:0:1:2:3:4:")) != -1) {
+    while ( (c = getopt(argc, argv, "n:s:p:w:c:r:l:i:m:o:t:d:0:1:2:3:4:j:")) != -1) {
         switch (c) {
 	case 'p':
 	    printf ("option p with value '%s'\n", optarg);
@@ -237,6 +240,11 @@ int main( int argc, char *argv[] )
             printf ("option 4 (response time limit for transaction 4) '%s'\n", optarg);
             rt_limit[4] = atoi(optarg);
             break;
+	case 'j':
+	    max_items *= atoi(optarg);
+	    dist_per_ware *= atoi(optarg);
+	    printf("option j (scale ratio) scale database size by scaling max_items and dist_per_ware by %s\n", optarg);
+	    break;
         case '?':
     	    printf("Usage: tpcc_start -w warehouses -c connections -r warmup_time -l running_time -i report_interval\n");
             exit(0);
@@ -699,16 +707,16 @@ int thread_main (thread_arg* arg)
   /* attach backup database */
   //sqlite3_exec(sqlite3_db, "attach database '/home/mania/tpcc.db_backup' as backup;", 0, 0, 0);
 
-  int n_databases = 9;
-  char attach_db[60];
+  int n_databases = 10;
+  char attach_db[120];
 
     for(int i = 0; i < n_db_on_pmem; i++) {
-       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", pmem_location, i, i);
+       snprintf(attach_db, 120, "attach database '%s/tpcc.%d.db_backup' as backup%d;", pmem_location, i, i);
        sqlite3_exec(sqlite3_db, attach_db, 0, 0, 0);
     }
     
     for(int i =n_db_on_pmem; i < n_databases; i++) {
-       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", ssd_location, i, i);
+       snprintf(attach_db, 120, "attach database '%s/tpcc.%d.db_backup' as backup%d;", ssd_location, i, i);
        sqlite3_exec(sqlite3_db, attach_db, 0, 0, 0);
     }
 

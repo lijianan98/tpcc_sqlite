@@ -24,6 +24,9 @@
 #define NNULL ((void *)0)
 //#undef NULL
 
+int max_items = 100000;
+int dist_per_ware = 10;
+
 sqlite3* sqlite;
 sqlite3_stmt* stmt[11];
 
@@ -93,7 +96,7 @@ main(argc, argv)
         ssd_location = "/home/mania/databases";
     /* Parse args */
 
-    while ( (c = getopt(argc, argv, "p:s:c:w:l:m:n:d:")) != -1) {
+    while ( (c = getopt(argc, argv, "p:s:c:w:l:m:n:d:j:")) != -1) {
         switch (c) {
 	case 'p':
 	    printf ("option p with value '%s'\n", optarg);
@@ -128,11 +131,11 @@ main(argc, argv)
             printf ("option d with value '%s'\n", optarg);
             db_path = optarg;
             break;
-        /*case 'i':
-                printf("option i(MAXITEMS #) with value '%s'\n", optarg);
-                MAXITEMS = atoi(optarg);
-		break;
-        */
+	case 'j':
+            max_items *= atoi(optarg);
+            dist_per_ware *= atoi(optarg);
+            printf("option j (scale ratio) scale database size by scaling max_items and dist_per_ware by %s\n", optarg);
+            break;
 	case '?':
     	    printf("Usage: tpcc_load -w warehouses -m min_wh -n max_wh\n");
     	    printf("* [part]: 1=ITEMS 2=WAREHOUSE 3=CUSTOMER 4=ORDERS\n");
@@ -186,16 +189,16 @@ main(argc, argv)
         /** 
          * attach tpcc.db_backup as backup
          */
-    int n_databases = 9;
-    char attach_db[60];
+    int n_databases = 10;
+    char attach_db[120];
 
     for(int i = 0; i < n_db_on_pmem; i++) {
-       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", pmem_location, i, i);
+       snprintf(attach_db, 120, "attach database '%s/tpcc.%d.db_backup' as backup%d;", pmem_location, i, i);
        sqlite3_exec(sqlite, attach_db, 0, 0, 0);
     }
     
     for(int i =n_db_on_pmem; i < n_databases; i++) {
-       snprintf(attach_db, 60, "attach database '%s/tpcc.%d.db_backup' as backup%d;", ssd_location, i, i);
+       snprintf(attach_db, 120, "attach database '%s/tpcc.%d.db_backup' as backup%d;", ssd_location, i, i);
        sqlite3_exec(sqlite, attach_db, 0, 0, 0);
     }
 
@@ -313,7 +316,8 @@ LoadItems()
 	char            i_data[51];
 
 	int             idatasiz;
-	int             orig[MAXITEMS+1];
+	//int             orig[max_items+1];	
+	int 		*orig = (int *)malloc((max_items+1) * sizeof(int));	// instead of putting on stack, now move it to heap
 	int             pos;
 	int             i;
 	int             retried = 0;
@@ -323,11 +327,11 @@ LoadItems()
 
 	printf("Loading Item \n");
 
-	for (i = 0; i < MAXITEMS / 10; i++)
+	for (i = 0; i < max_items / 10; i++)
 		orig[i] = 0;
-	for (i = 0; i < MAXITEMS / 10; i++) {
+	for (i = 0; i < max_items / 10; i++) {
 		do {
-			pos = RandomNumber(0L, MAXITEMS);
+			pos = RandomNumber(0L, max_items);
 		} while (orig[pos]);
 		orig[pos] = 1;
 	}
@@ -338,7 +342,7 @@ retry:
 
     if( sqlite3_exec(sqlite, "BEGIN TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
-    for (i_id = 1; i_id <= MAXITEMS; i_id++) {
+    for (i_id = 1; i_id <= max_items; i_id++) {
 
 		/* Generate Item Data */
 		i_im_id = RandomNumber(1L, 10000L);
@@ -408,8 +412,10 @@ retry:
 	//if ( sqlite3_exec(sqlite, "END TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
 	printf("Item Done. \n");
+	free(orig);
 	return;
 sqlerr:
+	free(orig);
 	Error(stmt[0]);
 }
 
@@ -518,7 +524,7 @@ LoadCust()
 	if( sqlite3_exec(sqlite, "BEGIN TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
 	for (w_id = min_ware; w_id <= max_ware; w_id++)
-		for (d_id = 1L; d_id <= DIST_PER_WARE; d_id++)
+		for (d_id = 1L; d_id <= dist_per_ware; d_id++)
 			Customer(d_id, w_id);
 
 	/* EXEC SQL COMMIT WORK;*/	/* Just in case */
@@ -551,7 +557,7 @@ LoadOrd()
 	if( sqlite3_exec(sqlite, "BEGIN TRANSACTION;", NULL, NULL, NULL) != SQLITE_OK) goto sqlerr;
 
 	for (w_id = min_ware; w_id <= max_ware; w_id++)
-		for (d_id = 1L; d_id <= DIST_PER_WARE; d_id++)
+		for (d_id = 1L; d_id <= dist_per_ware; d_id++)
 			Orders(d_id, w_id);
 
 	/* EXEC SQL COMMIT WORK; */	/* Just in case */
@@ -593,7 +599,8 @@ Stock(w_id)
 	char            s_data[51];
 
 	int             sdatasiz;
-	int             orig[MAXITEMS+1];
+	//int             orig[max_items+1];
+	int             *orig = (int *)malloc((max_items+1) * sizeof(int));	// instead of putting on stack, now move it to heap
 	int             pos;
 	int             i;
 	int             error = 0;
@@ -603,17 +610,17 @@ Stock(w_id)
 	printf("Loading Stock Wid=%ld\n", w_id);
 	s_w_id = w_id;
 
-	for (i = 0; i < MAXITEMS / 10; i++)
+	for (i = 0; i < max_items / 10; i++)
 		orig[i] = 0;
-	for (i = 0; i < MAXITEMS / 10; i++) {
+	for (i = 0; i < max_items / 10; i++) {
 		do {
-			pos = RandomNumber(0L, MAXITEMS);
+			pos = RandomNumber(0L, max_items);
 		} while (orig[pos]);
 		orig[pos] = 1;
 	}
 
 retry:
-	for (s_i_id = 1; s_i_id <= MAXITEMS; s_i_id++) {
+	for (s_i_id = 1; s_i_id <= max_items; s_i_id++) {
 
 		/* Generate Stock Data */
 		s_quantity = RandomNumber(10L, 100L);
@@ -687,8 +694,10 @@ retry:
 	printf(" Stock Done.\n");
 out:
 	printf("debug Stock function, error = %d\n", error);
+	free(orig);
 	return error;
 sqlerr:
+    free(orig);
     Error(0);
 }
 
@@ -727,7 +736,7 @@ District(w_id)
 	d_next_o_id = 3001L;
 
 retry:
-	for (d_id = 1; d_id <= DIST_PER_WARE; d_id++) {
+	for (d_id = 1; d_id <= dist_per_ware; d_id++) {
 
 		/* Generate District Data */
 
@@ -1062,7 +1071,7 @@ retry:
 
 		for (ol = 1; ol <= o_ol_cnt; ol++) {
 			/* Generate Order Line Data */
-			ol_i_id = RandomNumber(1L, MAXITEMS);
+			ol_i_id = RandomNumber(1L, max_items);
 			ol_supply_w_id = o_w_id;
 			ol_quantity = 5;
 			ol_amount = 0.0;

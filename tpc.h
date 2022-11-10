@@ -10,9 +10,9 @@ extern "C" {
 /*
  * correct values
  */
-#define MAXITEMS      100000 
+extern int max_items;		// 100000
 #define CUST_PER_DIST 3000 
-#define DIST_PER_WARE 10 
+extern int dist_per_ware; 	// 10
 #define ORD_PER_DIST  3000
 /*
  */
@@ -20,9 +20,9 @@ extern "C" {
 /* 
  * small values
 
-#define MAXITEMS 	1000
+#define max_items 	1000
 #define CUST_PER_DIST 	30
-#define DIST_PER_WARE	3
+#define dist_per_ware	3
 #define ORD_PER_DIST	30
 
  */ 
