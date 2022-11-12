@@ -1,14 +1,14 @@
 PRAGMA foreign_keys = O;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.0.db_backup' as backup0;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.1.db_backup' as backup1;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.2.db_backup' as backup2;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.3.db_backup' as backup3;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.4.db_backup' as backup4;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.5.db_backup' as backup5;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.6.db_backup' as backup6;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.7.db_backup' as backup7;
-attach database '/mnt/pmem0/tpcc_w_4/tpcc.8.db_backup' as backup8;
-attach database '/home/mania/tpcc_w_4/tpcc.9.db_backup' as backup9;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.0.db_backup' as backup0;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.1.db_backup' as backup1;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.2.db_backup' as backup2;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.3.db_backup' as backup3;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.4.db_backup' as backup4;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.5.db_backup' as backup5;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.6.db_backup' as backup6;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.7.db_backup' as backup7;
+attach database '/mnt/pmem0/tpcc_w_16/tpcc.8.db_backup' as backup8;
+attach database '/home/mania/tpcc_w_16/tpcc.9.db_backup' as backup9;
 
 
 drop table if exists warehouse;

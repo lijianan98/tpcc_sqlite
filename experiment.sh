@@ -37,5 +37,6 @@ rm -f tpcc.db
 
 
 sqlite3 tpcc.db '.read tpcc.sql';
-./tpcc_load -w $w -c $(($NDB)) -p $pmemLocation -s $ssdLocation -j $j -d tpcc.db;	# -c means how many databases on PM
+#./tpcc_load -w $w -c $(($NDB)) -p $pmemLocation -s $ssdLocation -j $j -d tpcc.db;	# -c means how many databases on PM
+./copy.sh -p   -s   -j   
 ./tpcc_start -w $w -c $c -t 20000 -n $(($NDB)) -p $pmemLocation -s $ssdLocation -j $j -d tpcc.db
