@@ -1,0 +1,71 @@
+new order transaction has 9 queries
+some parameters: 
+w_id, d_id, c_id, o_ol_cnt, c_last[17], c_credit[3], d_next_o_id, o_id, i_name[25], i_price, i_data[51], s_data[51], s_dist_*[25] (* = 01 ~ 10), ol_dist_info[25], ol_supply_w_id, ol_amount, ol_number, ol_quantity
+
+query 1, locate customer by w_id, d_id, c_id
+query 2, district by w_idm d_id
+query 3, update district's d_next_o_id
+query 4, insert into orders
+query 5, insert into new_orders
+query 6, 
+
+1. SELECT c_discount, c_last, c_credit, w_tax
+                INTO :c_discount, :c_last, :c_credit, :w_tax
+                FROM customer, warehouse
+                WHERE w_id = :w_id 
+                AND c_w_id = w_id 
+                AND c_d_id = :d_id 
+                AND c_id = :c_id;
+
+2. SELECT d_next_o_id, d_tax INTO :d_next_o_id, :d_tax
+	        FROM district
+	        WHERE d_id = :d_id
+		AND d_w_id = :w_id
+		FOR UPDATE
+
+3. UPDATE district SET d_next_o_id = :d_next_o_id + 1
+	        WHERE d_id = :d_id 
+		AND d_w_id = :w_id
+
+4. INSERT INTO orders (o_id, o_d_id, o_w_id, o_c_id,
+			             o_entry_d, o_ol_cnt, o_all_local)
+		VALUES(:o_id, :d_id, :w_id, :c_id, 
+		       :datetime,
+                       :o_ol_cnt, :o_all_local)
+
+5. INSERT INTO new_orders (no_o_id, no_d_id, no_w_id)
+	   VALUES (:o_id,:d_id,:w_id)
+
+for (ol_number = 1; ol_number <= o_ol_cnt; ol_number++) {
+		ol_supply_w_id = supware[ol_num_seq[ol_number - 1]];
+		ol_i_id = itemid[ol_num_seq[ol_number - 1]];
+		ol_quantity = qty[ol_num_seq[ol_number - 1]];
+		
+		6. EXEC_SQL SELECT i_price, i_name, i_data
+			INTO :i_price, :i_name, :i_data
+		        FROM item
+		        WHERE i_id = :ol_i_id
+		
+		7. SELECT s_quantity, s_data, s_dist_01, s_dist_02,
+		                s_dist_03, s_dist_04, s_dist_05, s_dist_06,
+		                s_dist_07, s_dist_08, s_dist_09, s_dist_10
+			INTO :s_quantity, :s_data, :s_dist_01, :s_dist_02,
+		             :s_dist_03, :s_dist_04, :s_dist_05, :s_dist_06,
+		             :s_dist_07, :s_dist_08, :s_dist_09, :s_dist_10
+		        FROM stock
+		        WHERE s_i_id = :ol_i_id 
+			AND s_w_id = :ol_supply_w_id
+			FOR UPDATE
+		
+		8. UPDATE stock SET s_quantity = :s_quantity
+		        WHERE s_i_id = :ol_i_id 
+			AND s_w_id = :ol_supply_w_id
+
+		9. INSERT INTO order_line (ol_o_id, ol_d_id, ol_w_id, 
+						 ol_number, ol_i_id, 
+						 ol_supply_w_id, ol_quantity, 
+						 ol_amount, ol_dist_info)
+			VALUES (:o_id, :d_id, :w_id, :ol_number, :ol_i_id,
+				:ol_supply_w_id, :ol_quantity, :ol_amount,
+				:ol_dist_info)
+

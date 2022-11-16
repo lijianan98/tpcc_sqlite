@@ -35,3 +35,5 @@ rm -f tpcc.db
 
 sqlite3 tpcc.db '.read tpcc.sql';
 ./tpcc_load -w $w -c $(($NDB)) -p $pmemLocation -s $ssdLocation -j $j -d tpcc.db;	# -c means how many databases on PM
+
+#./tpcc_load -w 16 -c 1 -p /mnt/pmem0/tpcc_w_16 -s /home/mania/tpcc_w_16 -d tpcc.db

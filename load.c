@@ -132,8 +132,9 @@ main(argc, argv)
             db_path = optarg;
             break;
 	case 'j':
-            max_items *= atoi(optarg);
+            //max_items *= atoi(optarg);
             dist_per_ware *= atoi(optarg);
+	    
             printf("option j (scale ratio) scale database size by scaling max_items and dist_per_ware by %s\n", optarg);
             break;
 	case '?':

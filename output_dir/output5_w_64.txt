@@ -1,0 +1,426 @@
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '64'
+option c with value '1'
+option t (number of transactions) with value '40000'
+option  n with value '9'
+option p with value '/mnt/pmem0/tpcc_w_64'
+option s with value '/home/mania/tpcc_w_64'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 10
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 64
+ [connection]: 1
+     [rampup]: 10 (sec.)
+    [measure]: 20 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(10 sec.)
+thread_main: opening db, thread id = 140318566528768
+SPLIT_FILES is not defined
+thread_main: opened db, thread id = 140318566528768
+
+MEASURING START.
+
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 6497888481 nanoseconds
+payment: timing = 1806654608 nanoseconds
+ordstat: timing = 196531119 nanoseconds
+delivery: timing = 196979489848 nanoseconds
+slev: timing = 367361323634 nanoseconds
+.
+
+<Raw Results>
+  [0] sc:380 lt:0  rt:0  fl:0 avg_rt: 17.0 (5)
+  [1] sc:379 lt:0  rt:0  fl:0 avg_rt: 4.7 (5)
+  [2] sc:38 lt:0  rt:0  fl:0 avg_rt: 5.1 (5)
+  [3] sc:36 lt:1  rt:0  fl:0 avg_rt: 5323.7 (80)
+  [4] sc:0 lt:38  rt:0  fl:0 avg_rt: 9667.4 (20)
+ in 20 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:380  lt:0  rt:0  fl:0 
+  [1] sc:379  lt:0  rt:0  fl:0 
+  [2] sc:38  lt:0  rt:0  fl:0 
+  [3] sc:36  lt:1  rt:0  fl:0 
+  [4] sc:0  lt:38  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.46% (>=43.0%) [OK]
+   Order-Status: 4.36% (>= 4.0%) [OK]
+       Delivery: 4.24% (>= 4.0%) [OK]
+    Stock-Level: 4.36% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 97.30%  [OK]
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 38
+
+<TpmC>
+                 1140.000 TpmC
+
+Time taken
+                 579.108 seconds
+warehouse number is 64, num_on_pmem is 9
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '64'
+option c with value '1'
+option t (number of transactions) with value '40000'
+option  n with value '8'
+option p with value '/mnt/pmem0/tpcc_w_64'
+option s with value '/home/mania/tpcc_w_64'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 10
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 64
+ [connection]: 1
+     [rampup]: 10 (sec.)
+    [measure]: 20 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(10 sec.)
+thread_main: opening db, thread id = 139873931228928
+SPLIT_FILES is not defined
+thread_main: opened db, thread id = 139873931228928
+
+MEASURING START.
+
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 12685330032 nanoseconds
+payment: timing = 3815966765 nanoseconds
+ordstat: timing = 374380481 nanoseconds
+delivery: timing = 302066319798 nanoseconds
+slev: timing = 479727749424 nanoseconds
+.
+
+<Raw Results>
+  [0] sc:152 lt:0  rt:0  fl:0 avg_rt: 83.1 (5)
+  [1] sc:152 lt:0  rt:0  fl:0 avg_rt: 24.9 (5)
+  [2] sc:15 lt:0  rt:0  fl:0 avg_rt: 24.8 (5)
+  [3] sc:11 lt:4  rt:0  fl:0 avg_rt: 20137.6 (80)
+  [4] sc:0 lt:15  rt:0  fl:0 avg_rt: 31981.7 (20)
+ in 20 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:152  lt:0  rt:0  fl:0 
+  [1] sc:152  lt:0  rt:0  fl:0 
+  [2] sc:15  lt:0  rt:0  fl:0 
+  [3] sc:11  lt:4  rt:0  fl:0 
+  [4] sc:0  lt:15  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.55% (>=43.0%) [OK]
+   Order-Status: 4.30% (>= 4.0%) [OK]
+       Delivery: 4.30% (>= 4.0%) [OK]
+    Stock-Level: 4.30% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 73.33%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 15
+
+<TpmC>
+                 456.000 TpmC
+
+Time taken
+                 808.533 seconds
+warehouse number is 64, num_on_pmem is 8
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '64'
+option c with value '1'
+option t (number of transactions) with value '40000'
+option  n with value '6'
+option p with value '/mnt/pmem0/tpcc_w_64'
+option s with value '/home/mania/tpcc_w_64'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 10
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 64
+ [connection]: 1
+     [rampup]: 10 (sec.)
+    [measure]: 20 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(10 sec.)
+thread_main: opening db, thread id = 139652293248768
+SPLIT_FILES is not defined
+thread_main: opened db, thread id = 139652293248768
+
+MEASURING START.
+
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 19269520227 nanoseconds
+payment: timing = 5979036933 nanoseconds
+ordstat: timing = 547644802 nanoseconds
+delivery: timing = 317126469252 nanoseconds
+slev: timing = 530883524667 nanoseconds
+.
+
+<Raw Results>
+  [0] sc:139 lt:0  rt:0  fl:0 avg_rt: 138.0 (5)
+  [1] sc:140 lt:0  rt:0  fl:0 avg_rt: 42.4 (5)
+  [2] sc:13 lt:0  rt:0  fl:0 avg_rt: 41.8 (5)
+  [3] sc:11 lt:3  rt:0  fl:0 avg_rt: 22651.7 (80)
+  [4] sc:0 lt:13  rt:0  fl:0 avg_rt: 40837.0 (20)
+ in 20 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:139  lt:0  rt:0  fl:0 
+  [1] sc:140  lt:0  rt:0  fl:0 
+  [2] sc:13  lt:0  rt:0  fl:0 
+  [3] sc:11  lt:3  rt:0  fl:0 
+  [4] sc:0  lt:13  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.89% (>=43.0%) [OK]
+   Order-Status: 4.08% (>= 4.0%) [OK]
+       Delivery: 4.39% (>= 4.0%) [OK]
+    Stock-Level: 4.08% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 78.57%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 13
+
+<TpmC>
+                 417.000 TpmC
+
+Time taken
+                 891.471 seconds
+warehouse number is 64, num_on_pmem is 6
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '64'
+option c with value '1'
+option t (number of transactions) with value '40000'
+option  n with value '3'
+option p with value '/mnt/pmem0/tpcc_w_64'
+option s with value '/home/mania/tpcc_w_64'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 10
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 64
+ [connection]: 1
+     [rampup]: 10 (sec.)
+    [measure]: 20 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(10 sec.)
+thread_main: opening db, thread id = 140397459891968
+SPLIT_FILES is not defined
+thread_main: opened db, thread id = 140397459891968
+
+MEASURING START.
+
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 20329649655 nanoseconds
+payment: timing = 6171652575 nanoseconds
+ordstat: timing = 580979698 nanoseconds
+delivery: timing = 316699900278 nanoseconds
+slev: timing = 532949967328 nanoseconds
+.
+
+<Raw Results>
+  [0] sc:52 lt:0  rt:0  fl:0 avg_rt: 389.1 (5)
+  [1] sc:56 lt:0  rt:0  fl:0 avg_rt: 109.4 (5)
+  [2] sc:5 lt:0  rt:0  fl:0 avg_rt: 115.3 (5)
+  [3] sc:3 lt:3  rt:0  fl:0 avg_rt: 52782.9 (80)
+  [4] sc:0 lt:6  rt:0  fl:0 avg_rt: 88824.6 (20)
+ in 20 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:52  lt:0  rt:0  fl:0 
+  [1] sc:56  lt:0  rt:0  fl:0 
+  [2] sc:5  lt:0  rt:0  fl:0 
+  [3] sc:3  lt:3  rt:0  fl:0 
+  [4] sc:0  lt:6  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 44.80% (>=43.0%) [OK]
+   Order-Status: 4.00% (>= 4.0%) [OK]
+       Delivery: 4.80% (>= 4.0%) [OK]
+    Stock-Level: 4.80% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 50.00%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 6
+
+<TpmC>
+                 156.000 TpmC
+
+Time taken
+                 901.042 seconds
+warehouse number is 64, num_on_pmem is 3
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '64'
+option c with value '1'
+option t (number of transactions) with value '40000'
+option  n with value '0'
+option p with value '/mnt/pmem0/tpcc_w_64'
+option s with value '/home/mania/tpcc_w_64'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 10
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 64
+ [connection]: 1
+     [rampup]: 10 (sec.)
+    [measure]: 20 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(10 sec.)
+thread_main: opening db, thread id = 139967555954432
+SPLIT_FILES is not defined
+thread_main: opened db, thread id = 139967555954432
+
+MEASURING START.
+
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 20696180746 nanoseconds
+payment: timing = 6487777834 nanoseconds
+ordstat: timing = 571311859 nanoseconds
+delivery: timing = 307655876073 nanoseconds
+slev: timing = 529688404695 nanoseconds
+.
+
+<Raw Results>
+  [0] sc:1 lt:0  rt:0  fl:0 avg_rt: 20596.0 (5)
+  [1] sc:0 lt:0  rt:0  fl:0 avg_rt: inf (5)
+  [2] sc:0 lt:0  rt:0  fl:0 avg_rt: inf (5)
+  [3] sc:0 lt:1  rt:0  fl:0 avg_rt: 307653.5 (80)
+  [4] sc:0 lt:0  rt:0  fl:0 avg_rt: inf (20)
+ in 20 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:1  lt:0  rt:0  fl:0 
+  [1] sc:0  lt:0  rt:0  fl:0 
+  [2] sc:0  lt:0  rt:0  fl:0 
+  [3] sc:0  lt:1  rt:0  fl:0 
+  [4] sc:0  lt:0  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 0.00% (>=43.0%) [NG] *
+   Order-Status: 0.00% (>= 4.0%) [NG] *
+       Delivery: 50.00% (>= 4.0%) [OK]
+    Stock-Level: 0.00% (>= 4.0%) [NG] *
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: -nan%  [NG] *
+   Order-Status: -nan%  [NG] *
+       Delivery: 0.00%  [NG] *
+    Stock-Level: -nan%  [NG] *
+success[4] = 0, late[4] = 0
+
+<TpmC>
+                 3.000 TpmC
+
+Time taken
+                 898.246 seconds
+warehouse number is 64, num_on_pmem is 0
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '64'
+option c with value '1'
+option t (number of transactions) with value '40000'
+option  n with value '6'
+option p with value '/mnt/pmem0/tpcc_w_64'
+option s with value '/home/mania/tpcc_w_64'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 5
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 64
+ [connection]: 1
+     [rampup]: 10 (sec.)
+    [measure]: 20 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(10 sec.)
+thread_main: opening db, thread id = 140708610963200
+SPLIT_FILES is not defined
+thread_main: opened db, thread id = 140708610963200
+
+MEASURING START.
+
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 17609771847 nanoseconds
+payment: timing = 5295521835 nanoseconds
+ordstat: timing = 486810701 nanoseconds
+delivery: timing = 488619433340 nanoseconds
+slev: timing = 495236600617 nanoseconds
+.
+
+<Raw Results>
+  [0] sc:121 lt:0  rt:0  fl:0 avg_rt: 144.9 (5)
+  [1] sc:122 lt:0  rt:0  fl:0 avg_rt: 43.1 (5)
+  [2] sc:13 lt:0  rt:0  fl:0 avg_rt: 37.1 (5)
+  [3] sc:11 lt:1  rt:0  fl:0 avg_rt: 40718.1 (80)
+  [4] sc:0 lt:12  rt:0  fl:0 avg_rt: 41269.5 (20)
+ in 20 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:121  lt:0  rt:0  fl:0 
+  [1] sc:122  lt:0  rt:0  fl:0 
+  [2] sc:13  lt:0  rt:0  fl:0 
+  [3] sc:11  lt:1  rt:0  fl:0 
+  [4] sc:0  lt:12  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.57% (>=43.0%) [OK]
+   Order-Status: 4.64% (>= 4.0%) [OK]
+       Delivery: 4.29% (>= 4.0%) [OK]
+    Stock-Level: 4.29% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 91.67%  [OK]
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 12
+
+<TpmC>
+                 363.000 TpmC
+
+Time taken
+                 1021.204 seconds
+warehouse number is 64, top 3 accessed on ssd

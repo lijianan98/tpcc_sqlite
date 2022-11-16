@@ -137,7 +137,7 @@ int main( int argc, char *argv[] )
   /* initialize */
   hist_init();
   activate_transaction = 1;
-  counting_on = 1;
+  counting_on = 0;		// this line is missing somehow
 
   for ( i=0; i<5; i++ ){
     success[i]=0;
@@ -241,7 +241,7 @@ int main( int argc, char *argv[] )
             rt_limit[4] = atoi(optarg);
             break;
 	case 'j':
-	    max_items *= atoi(optarg);
+	    //max_items *= atoi(optarg);
 	    dist_per_ware *= atoi(optarg);
 	    printf("option j (scale ratio) scale database size by scaling max_items and dist_per_ware by %s\n", optarg);
 	    break;
@@ -440,14 +440,15 @@ int main( int argc, char *argv[] )
   /* start timer */
 
 #ifndef _SLEEP_ONLY_
-  if( setitimer(ITIMER_REAL, &itval, NULL) == -1 ) {
+  printf("start timer, counting_on = %d\n", counting_on);
+  if( setitimer(ITIMER_REAL, &itval, NULL) == -1 ) {	// timer starts from here
     fprintf(stderr, "error in setitimer()\n");
   }
 #endif
 
-  counting_on = 1;
+  counting_on = 1;		// original in splitfs: counting_on = 1;
+
   /* wait signal */
-  /*
   for(i = 0; i < (measure_time / PRINT_INTERVAL); i++ ) {
   //while (activate_transaction) {	  
 #ifndef _SLEEP_ONLY_
@@ -457,8 +458,8 @@ int main( int argc, char *argv[] )
     alarm_dummy();
 #endif
   }
-  */
-  counting_on = 0;
+
+  counting_on = 0;		// original in splitfs: counting_on = 0;
 
 
 #ifndef _SLEEP_ONLY_

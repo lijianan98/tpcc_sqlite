@@ -1,14 +1,14 @@
 PRAGMA foreign_keys = O;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.0.db_backup' as backup0;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.1.db_backup' as backup1;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.2.db_backup' as backup2;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.3.db_backup' as backup3;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.4.db_backup' as backup4;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.5.db_backup' as backup5;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.6.db_backup' as backup6;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.7.db_backup' as backup7;
-attach database '/mnt/pmem0/tpcc_w_16/tpcc.8.db_backup' as backup8;
-attach database '/home/mania/tpcc_w_16/tpcc.9.db_backup' as backup9;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.0.db_backup' as backup0;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.1.db_backup' as backup1;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.2.db_backup' as backup2;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.3.db_backup' as backup3;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.4.db_backup' as backup4;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.5.db_backup' as backup5;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.6.db_backup' as backup6;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.7.db_backup' as backup7;
+attach database '/mnt/pmem0/backup_tpcc/tpcc.8.db_backup' as backup8;
+attach database '/home/mania/tpcc_w_640/tpcc.9.db_backup' as backup9;
 
 
 drop table if exists warehouse;
@@ -44,7 +44,7 @@ FOREIGN KEY(d_w_id) REFERENCES warehouse(w_id));
 
 drop table if exists customer;
 
-create table backup2.customer (
+create table backup3.customer (
 c_id int not null, 
 c_d_id tinyint not null,
 c_w_id smallint not null, 
@@ -85,7 +85,7 @@ FOREIGN KEY(h_d_id, h_w_id) REFERENCES district(d_id, d_w_id));
 
 drop table if exists orders;
 
-create table backup1.orders (
+create table backup2.orders (
 o_id int not null, 
 o_d_id tinyint not null, 
 o_w_id smallint not null,
@@ -99,7 +99,7 @@ FOREIGN KEY(o_c_id, o_d_id, o_w_id) REFERENCES customer(c_id, c_d_id, c_w_id));
 
 drop table if exists new_orders;
 
-create table backup3.new_orders (
+create table backup4.new_orders (
 no_o_id int not null,
 no_d_id tinyint not null,
 no_w_id smallint not null,
@@ -135,7 +135,7 @@ PRIMARY KEY(i_id));
 
 drop table if exists stock;
 
-create table backup4.stock (
+create table backup1.stock (
 s_i_id int not null, 
 s_w_id smallint not null, 
 s_quantity smallint, 
@@ -157,7 +157,7 @@ PRIMARY KEY(s_i_id,s_w_id),
 FOREIGN KEY(s_w_id) REFERENCES warehouse(w_id),
 FOREIGN KEY(s_i_id) REFERENCES item(i_id));
 
-CREATE INDEX backup2.idx_customer ON customer (c_w_id, c_d_id, c_last, c_first);
-CREATE INDEX backup1.idx_orders ON orders (o_w_id, o_d_id, o_c_id, o_id);
+CREATE INDEX backup3.idx_customer ON customer (c_w_id, c_d_id, c_last, c_first);
+CREATE INDEX backup2.idx_orders ON orders (o_w_id, o_d_id, o_c_id, o_id);
 
 PRAGMA foreign_keys = ON;

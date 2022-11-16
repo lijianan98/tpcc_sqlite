@@ -8,16 +8,16 @@ export pmemlocation=$3
 export ssdlocation=$4
 export j=$5		# scale factor
 
-for i in 9 8 6 3 0
+for i in 9 8 6 3 0	# 9 8 6 3 0
 do
 	rm -f $pmemlocation/tpcc.*
 	rm -f $ssdlocation/tpcc.*
-	./copy.sh $i
-	
+
+	#copy tables to PM and SSD location	
 	for k in {0..8}
 	do
        	 	# copy tables 0,1...i-1 from backup to PM 
-        	if [ $k -lt $1 ]
+        	if [ $k -lt $i ]
         	then
                 	cp /mnt/pmem0/backup_tpcc/tpcc.$k.db_backup $pmemlocation
         	else
@@ -25,13 +25,14 @@ do
         	fi
 	done
 
-	./tpcc_start -w $w -c 1 -t $t -n $i -p $pmemlocation -s $ssdlocation -j $j -d tpcc.db >> output_w_$w.txt
+	./tpcc_start -w $w -r 60 -i 10 -l 240 -c 1 -t $t -n $i -p $pmemlocation -s $ssdlocation -j $j -d tpcc.db >> output_w_$w.txt
 	echo warehouse number is $w, num_on_pmem is $i >> output_w_$w.txt
+	sleep 20
 done
 
 rm -f $pmemlocation/tpcc.*
 rm -f $ssdlocation/tpcc.*
-
+:'
 for i in {0..8}
 do
         if [ $i -lt 3 ]
@@ -47,9 +48,9 @@ do
                cp /mnt/pmem0/backup_tpcc/tpcc.$i.db_backup $pmemlocation/tpcc.$j.db_backup
         fi
 done
-./tpcc_start -w $w -c 1 -t $t -n $i -p $pmemlocation -s $ssdlocation -j $j -d tpcc.db >> output_w_$w.txt
+./tpcc_start -w $w -r 120 -i 10 -l 240 -c 1 -t $t -n 6 -p $pmemlocation -s $ssdlocation -j $j -d tpcc.db >> output_w_$w.txt
 echo warehouse number is $w, top 3 accessed on ssd >> output_w_$w.txt
 
 rm -f $pmemlocation/tpcc.*
 rm -f $ssdlocation/tpcc.*
-
+'

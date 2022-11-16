@@ -1,0 +1,600 @@
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '4'
+option r with value '60'
+option i with value '10'
+option l with value '240'
+option c with value '1'
+option t (number of transactions) with value '6000'
+option  n with value '9'
+option p with value '/mnt/pmem0/tpcc_w_4'
+option s with value '/home/mania/tpcc_w_4'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 160
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 4
+ [connection]: 1
+     [rampup]: 60 (sec.)
+    [measure]: 240 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(60 sec.)
+thread_main: opening db, thread id = 140209837344512
+SPLIT_FILES is defined
+Insert table counter object of table : sqlite_master, initial value = 3
+thread_main: opened db, thread id = 140209837344512
+Insert table counter object of table : warehouse, initial value = 1
+Insert table counter object of table : district, initial value = 1
+Insert table counter object of table : customer, initial value = 1
+Insert table counter object of table : history, initial value = 2
+Insert table counter object of table : order_line, initial value = 1
+Insert table counter object of table : orders, initial value = 2
+Insert table counter object of table : new_orders, initial value = 2
+Insert table counter object of table : item, initial value = 1
+Insert table counter object of table : stock, initial value = 1
+
+MEASURING START.
+
+start timer, counting_on = 0
+  10, trx: 65, 95%: 1.000, 99%: 1.000, max_rt: 0.716, 64|0.560, 5|0.332, 6|2959.612, 6|320.386
+  20, trx: 25, 95%: 1.000, 99%: 1.000, max_rt: 0.479, 28|0.273, 4|0.316, 4|3759.270, 3|220.376
+  30, trx: 36, 95%: 1.000, 99%: 1.000, max_rt: 0.584, 34|0.284, 3|0.084, 3|4176.038, 4|221.082
+  40, trx: 96, 95%: 1.000, 99%: 1.000, max_rt: 0.615, 94|0.299, 9|0.285, 9|4594.397, 10|220.004
+  50, trx: 47, 95%: 1.000, 99%: 1.000, max_rt: 0.485, 47|0.285, 5|0.153, 5|4164.234, 4|228.747
+  60, trx: 34, 95%: 1.000, 99%: 1.000, max_rt: 0.498, 35|0.267, 4|0.284, 3|4792.550, 4|220.232
+  70, trx: 61, 95%: 1.000, 99%: 1.000, max_rt: 0.510, 62|0.438, 6|0.161, 6|5033.721, 6|220.428
+  80, trx: 12, 95%: 1.000, 99%: 1.000, max_rt: 0.449, 11|0.275, 1|0.091, 1|5436.002, 1|219.095
+  90, trx: 30, 95%: 1.000, 99%: 1.000, max_rt: 0.585, 29|0.321, 2|0.128, 3|6498.623, 3|219.682
+ 100, trx: 7, 95%: 1.000, 99%: 1.000, max_rt: 0.468, 7|0.186, 1|0.080, 1|7120.265, 1|219.658
+ 110, trx: 30, 95%: 1.000, 99%: 1.000, max_rt: 0.485, 33|0.198, 3|0.145, 3|7763.878, 3|219.797
+ 120, trx: 66, 95%: 1.000, 99%: 1.000, max_rt: 1.054, 65|0.441, 8|0.271, 7|7990.487, 7|265.947
+ 130, trx: 58, 95%: 1.000, 99%: 1.000, max_rt: 0.664, 60|0.312, 5|0.127, 6|6919.384, 6|219.863
+ 140, trx: 68, 95%: 1.000, 99%: 1.000, max_rt: 0.549, 66|0.277, 7|0.154, 6|6113.336, 6|220.140
+ 150, trx: 55, 95%: 1.000, 99%: 1.000, max_rt: 0.589, 52|0.249, 6|0.116, 6|5647.130, 6|219.860
+ 160, trx: 38, 95%: 1.000, 99%: 1.000, max_rt: 0.583, 41|0.283, 4|0.151, 4|5841.690, 3|219.753
+ 170, trx: 28, 95%: 1.000, 99%: 1.000, max_rt: 0.481, 28|0.279, 2|0.113, 3|5882.426, 3|219.490
+ 180, trx: 37, 95%: 1.000, 99%: 1.000, max_rt: 0.531, 32|0.289, 3|0.144, 3|6087.857, 3|220.732
+ 190, trx: 34, 95%: 1.000, 99%: 1.000, max_rt: 0.570, 37|0.298, 4|0.247, 4|6510.490, 5|219.509
+ 200, trx: 19, 95%: 1.000, 99%: 1.000, max_rt: 0.487, 20|0.259, 2|0.122, 1|6485.861, 1|218.899
+ 210, trx: 10, 95%: 1.000, 99%: 1.000, max_rt: 0.443, 9|0.238, 1|0.137, 1|7103.128, 1|219.798
+ 220, trx: 38, 95%: 1.000, 99%: 1.000, max_rt: 0.536, 37|0.307, 4|0.274, 4|7731.442, 4|219.942
+ 230, trx: 6, 95%: 1.000, 99%: 1.000, max_rt: 0.470, 8|0.108, 0|0.000, 1|7773.456, 1|218.940
+ 240, trx: 16, 95%: 1.000, 99%: 1.000, max_rt: 0.561, 16|0.155, 2|0.157, 2|8403.343, 1|211.108
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 920521122 nanoseconds
+payment: timing = 285393216 nanoseconds
+ordstat: timing = 30050969 nanoseconds
+delivery: timing = 557110874375 nanoseconds
+slev: timing = 56977743392 nanoseconds
+About to close database, tables accessed = 10
+Table stock, counter = 52484
+Table item, counter = 26143
+Table new_orders, counter = 422816
+Table orders, counter = 840677
+Table order_line, counter = 8402344
+Table history, counter = 5218
+Table customer, counter = 430341
+Table district, counter = 10695
+Table warehouse, counter = 7826
+Table sqlite_master, counter = 28
+.
+
+<Raw Results>
+  [0] sc:916 lt:0  rt:0  fl:0 avg_rt: 1.0 (5)
+  [1] sc:915 lt:0  rt:0  fl:0 avg_rt: 0.3 (5)
+  [2] sc:91 lt:0  rt:0  fl:0 avg_rt: 0.3 (5)
+  [3] sc:0 lt:92  rt:0  fl:0 avg_rt: 6055.5 (80)
+  [4] sc:0 lt:92  rt:0  fl:0 avg_rt: 619.3 (20)
+ in 240 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:916  lt:0  rt:0  fl:0 
+  [1] sc:915  lt:0  rt:0  fl:0 
+  [2] sc:91  lt:0  rt:0  fl:0 
+  [3] sc:0  lt:92  rt:0  fl:0 
+  [4] sc:0  lt:92  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.45% (>=43.0%) [OK]
+   Order-Status: 4.32% (>= 4.0%) [OK]
+       Delivery: 4.37% (>= 4.0%) [OK]
+    Stock-Level: 4.37% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 0.00%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 92
+
+<TpmC>
+                 229.000 TpmC
+
+Time taken
+                 617.348 seconds
+warehouse number is 4, num_on_pmem is 9
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '4'
+option r with value '60'
+option i with value '10'
+option l with value '240'
+option c with value '1'
+option t (number of transactions) with value '6000'
+option  n with value '8'
+option p with value '/mnt/pmem0/tpcc_w_4'
+option s with value '/home/mania/tpcc_w_4'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 160
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 4
+ [connection]: 1
+     [rampup]: 60 (sec.)
+    [measure]: 240 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(60 sec.)
+thread_main: opening db, thread id = 139649700685568
+SPLIT_FILES is defined
+Insert table counter object of table : sqlite_master, initial value = 3
+thread_main: opened db, thread id = 139649700685568
+Insert table counter object of table : warehouse, initial value = 1
+Insert table counter object of table : district, initial value = 1
+Insert table counter object of table : customer, initial value = 1
+Insert table counter object of table : history, initial value = 2
+Insert table counter object of table : orders, initial value = 2
+Insert table counter object of table : new_orders, initial value = 2
+Insert table counter object of table : item, initial value = 1
+Insert table counter object of table : stock, initial value = 1
+Insert table counter object of table : order_line, initial value = 2
+
+MEASURING START.
+
+start timer, counting_on = 0
+  10, trx: 61, 95%: 1.553, 99%: 1.708, max_rt: 1.973, 62|0.948, 6|0.593, 6|2986.533, 7|323.523
+  20, trx: 79, 95%: 1.000, 99%: 1.254, max_rt: 1.371, 79|0.455, 8|0.340, 7|3796.992, 8|286.812
+  30, trx: 46, 95%: 1.000, 99%: 1.031, max_rt: 1.031, 44|0.807, 4|0.255, 5|3339.505, 5|283.964
+  40, trx: 60, 95%: 1.589, 99%: 1.602, max_rt: 1.605, 61|0.715, 6|0.319, 6|4592.993, 5|286.002
+  50, trx: 82, 95%: 1.318, 99%: 1.449, max_rt: 1.545, 79|0.547, 8|0.177, 8|3349.378, 8|276.719
+  60, trx: 35, 95%: 1.000, 99%: 1.370, max_rt: 1.370, 39|0.623, 5|0.797, 4|3771.827, 4|274.244
+  70, trx: 21, 95%: 1.505, 99%: 1.542, max_rt: 1.542, 22|0.875, 1|0.418, 2|4432.069, 2|284.980
+  80, trx: 91, 95%: 1.193, 99%: 1.529, max_rt: 1.592, 88|0.606, 10|0.888, 9|4851.779, 10|284.661
+  90, trx: 41, 95%: 1.000, 99%: 1.416, max_rt: 1.416, 44|0.819, 3|0.202, 4|4411.998, 3|227.186
+ 100, trx: 35, 95%: 1.000, 99%: 1.289, max_rt: 1.289, 35|0.651, 4|0.260, 4|4272.775, 4|231.510
+ 110, trx: 34, 95%: 1.339, 99%: 1.519, max_rt: 1.519, 32|0.411, 4|0.222, 3|2883.569, 3|271.158
+ 120, trx: 45, 95%: 1.520, 99%: 1.641, max_rt: 1.641, 46|0.456, 4|0.440, 4|4465.711, 5|282.006
+ 130, trx: 19, 95%: 1.083, 99%: 1.446, max_rt: 1.446, 18|0.519, 2|0.256, 2|4660.787, 2|228.857
+ 140, trx: 30, 95%: 1.364, 99%: 1.506, max_rt: 1.506, 24|0.437, 3|0.249, 3|5915.540, 3|285.412
+ 150, trx: 17, 95%: 1.463, 99%: 1.537, max_rt: 1.537, 21|0.419, 2|0.342, 2|6196.475, 2|279.398
+ 160, trx: 15, 95%: 1.000, 99%: 1.000, max_rt: 0.802, 16|0.485, 1|0.443, 1|6754.067, 1|236.583
+ 170, trx: 7, 95%: 1.118, 99%: 1.118, max_rt: 1.118, 10|0.241, 1|0.350, 1|7451.933, 1|232.187
+ 180, trx: 17, 95%: 1.238, 99%: 1.289, max_rt: 1.289, 15|0.431, 1|0.221, 2|8705.415, 1|285.058
+ 190, trx: 6, 95%: 1.004, 99%: 1.004, max_rt: 1.004, 6|0.198, 1|0.104, 1|3541.759, 2|234.942
+ 200, trx: 17, 95%: 1.394, 99%: 1.508, max_rt: 1.508, 14|0.515, 2|0.202, 1|9087.566, 1|286.897
+ 210, trx: 22, 95%: 1.281, 99%: 1.304, max_rt: 1.304, 26|0.507, 2|0.215, 2|9738.724, 2|280.437
+ 220, trx: 9, 95%: 1.000, 99%: 1.000, max_rt: 0.876, 8|0.919, 0|0.000, 1|10126.641, 0|0.000
+ 230, trx: 14, 95%: 1.000, 99%: 1.021, max_rt: 1.021, 14|0.256, 2|0.434, 2|10779.708, 2|223.611
+ 240, trx: 15, 95%: 1.461, 99%: 1.532, max_rt: 1.532, 18|0.800, 2|0.296, 1|11172.022, 2|285.453
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 1724389042 nanoseconds
+payment: timing = 543619685 nanoseconds
+ordstat: timing = 55826993 nanoseconds
+delivery: timing = 771015369921 nanoseconds
+slev: timing = 65032979911 nanoseconds
+About to close database, tables accessed = 10
+Table order_line, counter = 8404451
+Table stock, counter = 52512
+Table item, counter = 26256
+Table new_orders, counter = 422816
+Table orders, counter = 840677
+Table history, counter = 5218
+Table customer, counter = 430240
+Table district, counter = 10695
+Table warehouse, counter = 7826
+Table sqlite_master, counter = 28
+.
+
+<Raw Results>
+  [0] sc:818 lt:0  rt:0  fl:0 avg_rt: 2.1 (5)
+  [1] sc:821 lt:0  rt:0  fl:0 avg_rt: 0.7 (5)
+  [2] sc:82 lt:0  rt:0  fl:0 avg_rt: 0.7 (5)
+  [3] sc:0 lt:81  rt:0  fl:0 avg_rt: 9518.7 (80)
+  [4] sc:0 lt:83  rt:0  fl:0 avg_rt: 783.5 (20)
+ in 240 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:818  lt:0  rt:0  fl:0 
+  [1] sc:821  lt:0  rt:0  fl:0 
+  [2] sc:82  lt:0  rt:0  fl:0 
+  [3] sc:0  lt:81  rt:0  fl:0 
+  [4] sc:0  lt:83  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.55% (>=43.0%) [OK]
+   Order-Status: 4.35% (>= 4.0%) [OK]
+       Delivery: 4.30% (>= 4.0%) [OK]
+    Stock-Level: 4.40% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 0.00%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 83
+
+<TpmC>
+                 204.500 TpmC
+
+Time taken
+                 841.091 seconds
+warehouse number is 4, num_on_pmem is 8
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '4'
+option r with value '60'
+option i with value '10'
+option l with value '240'
+option c with value '1'
+option t (number of transactions) with value '6000'
+option  n with value '6'
+option p with value '/mnt/pmem0/tpcc_w_4'
+option s with value '/home/mania/tpcc_w_4'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 160
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 4
+ [connection]: 1
+     [rampup]: 60 (sec.)
+    [measure]: 240 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(60 sec.)
+thread_main: opening db, thread id = 139674833196800
+SPLIT_FILES is defined
+Insert table counter object of table : sqlite_master, initial value = 3
+thread_main: opened db, thread id = 139674833196800
+Insert table counter object of table : new_orders, initial value = 1
+Insert table counter object of table : orders, initial value = 1
+Insert table counter object of table : order_line, initial value = 12
+Insert table counter object of table : customer, initial value = 1
+Insert table counter object of table : warehouse, initial value = 1
+Insert table counter object of table : district, initial value = 1
+Insert table counter object of table : item, initial value = 1
+Insert table counter object of table : stock, initial value = 1
+Insert table counter object of table : history, initial value = 2
+
+MEASURING START.
+
+start timer, counting_on = 0
+  10, trx: 39, 95%: 1.620, 99%: 1.760, max_rt: 1.877, 41|0.998, 4|0.811, 4|3552.558, 4|324.887
+  20, trx: 84, 95%: 1.524, 99%: 1.573, max_rt: 1.600, 87|1.048, 9|0.536, 8|3961.303, 9|323.439
+  30, trx: 48, 95%: 1.532, 99%: 1.644, max_rt: 1.644, 41|0.578, 4|0.498, 5|3519.541, 4|288.310
+  40, trx: 69, 95%: 1.653, 99%: 1.691, max_rt: 1.695, 70|0.954, 7|0.509, 7|3766.806, 7|319.167
+  50, trx: 91, 95%: 1.499, 99%: 1.623, max_rt: 1.696, 95|0.975, 10|0.703, 9|2494.220, 9|325.563
+  60, trx: 62, 95%: 1.636, 99%: 1.834, max_rt: 1.963, 62|0.941, 6|0.783, 6|3176.122, 6|323.832
+  70, trx: 50, 95%: 1.491, 99%: 1.518, max_rt: 1.518, 46|0.681, 4|0.460, 5|3339.590, 6|322.222
+  80, trx: 27, 95%: 1.603, 99%: 1.656, max_rt: 1.656, 28|0.757, 3|0.416, 3|4389.098, 3|318.868
+  90, trx: 50, 95%: 1.541, 99%: 1.659, max_rt: 1.659, 50|0.940, 6|0.748, 5|4815.004, 4|324.727
+ 100, trx: 90, 95%: 1.588, 99%: 1.678, max_rt: 1.722, 92|0.952, 8|0.861, 9|3130.004, 9|323.893
+ 110, trx: 58, 95%: 1.599, 99%: 1.637, max_rt: 1.647, 60|0.587, 6|0.554, 7|3119.281, 6|327.059
+ 120, trx: 79, 95%: 1.478, 99%: 1.588, max_rt: 1.593, 77|0.900, 8|0.541, 7|1894.288, 8|325.047
+ 130, trx: 70, 95%: 1.588, 99%: 1.658, max_rt: 1.661, 69|0.890, 7|0.399, 6|2377.339, 6|324.481
+ 140, trx: 59, 95%: 1.530, 99%: 1.574, max_rt: 1.630, 60|0.971, 6|0.422, 6|2776.157, 7|322.872
+ 150, trx: 75, 95%: 1.487, 99%: 1.611, max_rt: 1.612, 74|0.991, 7|0.788, 8|3332.050, 7|321.099
+ 160, trx: 53, 95%: 1.597, 99%: 1.631, max_rt: 1.826, 53|0.964, 6|0.478, 5|2939.501, 6|324.130
+ 170, trx: 54, 95%: 1.470, 99%: 1.523, max_rt: 1.597, 54|0.970, 5|0.566, 6|3663.865, 5|324.333
+ 180, trx: 80, 95%: 1.596, 99%: 1.690, max_rt: 1.745, 82|0.799, 8|0.369, 8|3749.746, 8|324.558
+ 190, trx: 56, 95%: 1.561, 99%: 1.688, max_rt: 1.774, 55|0.702, 6|0.499, 5|3766.211, 5|304.671
+ 200, trx: 86, 95%: 1.602, 99%: 1.673, max_rt: 1.692, 84|0.861, 8|0.371, 9|3075.832, 9|317.972
+ 210, trx: 69, 95%: 1.512, 99%: 1.709, max_rt: 1.761, 73|0.833, 7|0.423, 7|2490.726, 8|323.282
+ 220, trx: 88, 95%: 1.507, 99%: 1.539, max_rt: 1.545, 84|0.893, 9|0.900, 8|2505.630, 7|319.541
+ 230, trx: 89, 95%: 1.538, 99%: 1.608, max_rt: 1.619, 90|0.915, 9|0.882, 9|2527.231, 10|326.914
+ 240, trx: 45, 95%: 1.598, 99%: 1.791, max_rt: 1.790, 49|0.763, 4|0.322, 5|3120.883, 5|317.582
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 2707588292 nanoseconds
+payment: timing = 892572921 nanoseconds
+ordstat: timing = 86801194 nanoseconds
+delivery: timing = 313402473676 nanoseconds
+slev: timing = 76990794541 nanoseconds
+About to close database, tables accessed = 10
+Table history, counter = 5218
+Table stock, counter = 52110
+Table item, counter = 26055
+Table district, counter = 10695
+Table warehouse, counter = 7826
+Table customer, counter = 430294
+Table order_line, counter = 8401396
+Table orders, counter = 840677
+Table new_orders, counter = 422816
+Table sqlite_master, counter = 28
+.
+
+<Raw Results>
+  [0] sc:1571 lt:0  rt:0  fl:0 avg_rt: 1.7 (5)
+  [1] sc:1576 lt:0  rt:0  fl:0 avg_rt: 0.6 (5)
+  [2] sc:157 lt:0  rt:0  fl:0 avg_rt: 0.5 (5)
+  [3] sc:0 lt:157  rt:0  fl:0 avg_rt: 1996.2 (80)
+  [4] sc:0 lt:158  rt:0  fl:0 avg_rt: 487.3 (20)
+ in 240 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:1571  lt:0  rt:0  fl:0 
+  [1] sc:1576  lt:0  rt:0  fl:0 
+  [2] sc:157  lt:0  rt:0  fl:0 
+  [3] sc:0  lt:157  rt:0  fl:0 
+  [4] sc:0  lt:158  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.55% (>=43.0%) [OK]
+   Order-Status: 4.34% (>= 4.0%) [OK]
+       Delivery: 4.34% (>= 4.0%) [OK]
+    Stock-Level: 4.37% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 0.00%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 158
+
+<TpmC>
+                 392.750 TpmC
+
+Time taken
+                 397.956 seconds
+warehouse number is 4, num_on_pmem is 6
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '4'
+option r with value '60'
+option i with value '10'
+option l with value '240'
+option c with value '1'
+option t (number of transactions) with value '6000'
+option  n with value '3'
+option p with value '/mnt/pmem0/tpcc_w_4'
+option s with value '/home/mania/tpcc_w_4'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 160
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 4
+ [connection]: 1
+     [rampup]: 60 (sec.)
+    [measure]: 240 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(60 sec.)
+thread_main: opening db, thread id = 140209347860224
+SPLIT_FILES is defined
+Insert table counter object of table : sqlite_master, initial value = 3
+thread_main: opened db, thread id = 140209347860224
+Insert table counter object of table : warehouse, initial value = 1
+Insert table counter object of table : district, initial value = 1
+Insert table counter object of table : customer, initial value = 1
+Insert table counter object of table : history, initial value = 2
+Insert table counter object of table : orders, initial value = 2
+Insert table counter object of table : new_orders, initial value = 2
+Insert table counter object of table : item, initial value = 1
+Insert table counter object of table : stock, initial value = 1
+Insert table counter object of table : order_line, initial value = 2
+
+MEASURING START.
+
+start timer, counting_on = 0
+  10, trx: 47, 95%: 1.622, 99%: 1.769, max_rt: 1.857, 47|1.118, 4|0.953, 5|2500.079, 4|324.521
+  20, trx: 35, 95%: 1.444, 99%: 1.540, max_rt: 1.540, 34|0.802, 4|0.430, 3|2613.531, 4|284.029
+  30, trx: 19, 95%: 1.474, 99%: 1.619, max_rt: 1.619, 19|0.585, 2|0.314, 2|3621.769, 2|281.336
+  40, trx: 60, 95%: 1.585, 99%: 1.607, max_rt: 1.622, 60|0.905, 5|0.403, 6|4479.131, 5|319.214
+  50, trx: 26, 95%: 1.412, 99%: 1.659, max_rt: 1.659, 26|0.992, 4|0.476, 3|3986.126, 4|308.279
+  60, trx: 41, 95%: 1.502, 99%: 1.644, max_rt: 1.644, 44|0.935, 4|0.441, 4|2838.058, 4|321.435
+  70, trx: 47, 95%: 1.613, 99%: 1.649, max_rt: 1.649, 45|0.869, 4|0.603, 5|3765.742, 4|314.985
+  80, trx: 39, 95%: 1.640, 99%: 1.747, max_rt: 1.747, 39|0.903, 4|0.553, 4|4170.153, 4|324.075
+  90, trx: 57, 95%: 1.578, 99%: 1.694, max_rt: 1.696, 56|1.079, 6|0.546, 5|1765.310, 6|319.262
+ 100, trx: 51, 95%: 1.493, 99%: 1.647, max_rt: 1.651, 50|0.866, 5|0.465, 6|2446.979, 4|321.702
+ 110, trx: 34, 95%: 1.501, 99%: 1.734, max_rt: 1.733, 33|0.677, 3|0.343, 3|2488.179, 4|325.206
+ 120, trx: 48, 95%: 1.450, 99%: 1.550, max_rt: 1.550, 48|0.848, 5|0.504, 5|2550.767, 5|325.021
+ 130, trx: 31, 95%: 1.561, 99%: 1.597, max_rt: 1.597, 31|0.853, 3|0.366, 3|2906.135, 3|283.709
+ 140, trx: 71, 95%: 1.574, 99%: 1.697, max_rt: 1.740, 73|0.970, 8|0.603, 7|3150.107, 8|320.852
+ 150, trx: 46, 95%: 1.521, 99%: 1.576, max_rt: 1.576, 46|1.041, 4|0.885, 4|2259.755, 4|323.125
+ 160, trx: 43, 95%: 1.541, 99%: 1.685, max_rt: 1.685, 45|0.692, 5|0.444, 5|2180.175, 5|321.272
+ 170, trx: 54, 95%: 1.496, 99%: 1.541, max_rt: 1.629, 52|0.946, 5|0.386, 5|3109.564, 4|321.952
+ 180, trx: 56, 95%: 1.546, 99%: 1.663, max_rt: 1.687, 57|0.708, 5|0.475, 6|2280.654, 6|318.882
+ 190, trx: 30, 95%: 1.588, 99%: 1.624, max_rt: 1.624, 32|0.950, 3|0.258, 3|2575.466, 4|326.682
+ 200, trx: 37, 95%: 1.540, 99%: 1.629, max_rt: 1.629, 37|0.500, 4|0.847, 4|3571.614, 3|319.198
+ 210, trx: 59, 95%: 1.656, 99%: 1.675, max_rt: 1.811, 53|0.891, 5|0.851, 5|3570.626, 6|333.197
+ 220, trx: 51, 95%: 1.443, 99%: 1.507, max_rt: 1.637, 53|0.970, 6|0.358, 5|2191.757, 5|322.670
+ 230, trx: 29, 95%: 1.664, 99%: 1.669, max_rt: 1.669, 31|0.829, 3|0.728, 4|3968.135, 2|294.544
+ 240, trx: 33, 95%: 1.575, 99%: 1.672, max_rt: 1.672, 33|0.851, 3|0.426, 3|4400.702, 4|322.495
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 2829720071 nanoseconds
+payment: timing = 954232444 nanoseconds
+ordstat: timing = 84901944 nanoseconds
+delivery: timing = 496306800714 nanoseconds
+slev: timing = 77121424056 nanoseconds
+About to close database, tables accessed = 10
+Table order_line, counter = 8403718
+Table stock, counter = 52456
+Table item, counter = 26034
+Table new_orders, counter = 422816
+Table orders, counter = 840677
+Table history, counter = 5218
+Table customer, counter = 430275
+Table district, counter = 10695
+Table warehouse, counter = 7826
+Table sqlite_master, counter = 28
+.
+
+<Raw Results>
+  [0] sc:1044 lt:0  rt:0  fl:0 avg_rt: 2.7 (5)
+  [1] sc:1044 lt:0  rt:0  fl:0 avg_rt: 0.9 (5)
+  [2] sc:104 lt:0  rt:0  fl:0 avg_rt: 0.8 (5)
+  [3] sc:0 lt:105  rt:0  fl:0 avg_rt: 4726.7 (80)
+  [4] sc:0 lt:104  rt:0  fl:0 avg_rt: 741.5 (20)
+ in 240 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:1044  lt:0  rt:0  fl:0 
+  [1] sc:1044  lt:0  rt:0  fl:0 
+  [2] sc:104  lt:0  rt:0  fl:0 
+  [3] sc:0  lt:105  rt:0  fl:0 
+  [4] sc:0  lt:104  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.48% (>=43.0%) [OK]
+   Order-Status: 4.33% (>= 4.0%) [OK]
+       Delivery: 4.37% (>= 4.0%) [OK]
+    Stock-Level: 4.33% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 0.00%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 104
+
+<TpmC>
+                 261.000 TpmC
+
+Time taken
+                 582.311 seconds
+warehouse number is 4, num_on_pmem is 3
+CHECKING IF SQLITE IS THREADSAFE: RETURN VALUE = 1
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option w with value '4'
+option r with value '60'
+option i with value '10'
+option l with value '240'
+option c with value '1'
+option t (number of transactions) with value '6000'
+option  n with value '0'
+option p with value '/mnt/pmem0/tpcc_w_4'
+option s with value '/home/mania/tpcc_w_4'
+option j (scale ratio) scale database size by scaling max_items and dist_per_ware by 160
+option d with value 'tpcc.db'
+<Parameters>
+  [warehouse]: 4
+ [connection]: 1
+     [rampup]: 60 (sec.)
+    [measure]: 240 (sec.)
+seq_init with 10 10 1 1 1
+
+RAMP-UP TIME.(60 sec.)
+thread_main: opening db, thread id = 140188937058048
+SPLIT_FILES is defined
+Insert table counter object of table : sqlite_master, initial value = 3
+thread_main: opened db, thread id = 140188937058048
+Insert table counter object of table : customer, initial value = 1
+Insert table counter object of table : warehouse, initial value = 1
+Insert table counter object of table : district, initial value = 1
+Insert table counter object of table : orders, initial value = 2
+Insert table counter object of table : new_orders, initial value = 2
+Insert table counter object of table : item, initial value = 1
+Insert table counter object of table : stock, initial value = 1
+Insert table counter object of table : order_line, initial value = 2
+Insert table counter object of table : history, initial value = 2
+
+MEASURING START.
+
+start timer, counting_on = 0
+  10, trx: 43, 95%: 1.650, 99%: 1.813, max_rt: 1.953, 41|0.970, 5|0.916, 5|2608.796, 4|319.372
+  20, trx: 52, 95%: 1.569, 99%: 1.607, max_rt: 1.666, 51|0.930, 5|0.446, 5|3322.744, 5|319.382
+  30, trx: 54, 95%: 1.523, 99%: 1.633, max_rt: 1.645, 58|0.863, 6|0.842, 5|3787.545, 6|320.933
+  40, trx: 34, 95%: 1.566, 99%: 1.582, max_rt: 1.582, 34|0.917, 3|0.314, 4|3989.580, 4|315.484
+  50, trx: 34, 95%: 1.435, 99%: 1.587, max_rt: 1.587, 31|0.871, 4|0.601, 3|4591.713, 2|317.223
+  60, trx: 28, 95%: 1.535, 99%: 1.584, max_rt: 1.584, 27|0.822, 2|0.255, 3|5440.965, 3|316.286
+  70, trx: 31, 95%: 1.555, 99%: 1.669, max_rt: 1.670, 31|0.678, 3|0.284, 3|5419.665, 4|319.389
+  80, trx: 26, 95%: 1.590, 99%: 1.619, max_rt: 1.619, 29|0.758, 3|0.725, 3|5850.393, 2|317.407
+  90, trx: 17, 95%: 1.384, 99%: 1.404, max_rt: 1.404, 19|0.849, 2|0.198, 1|6129.924, 2|316.030
+ 100, trx: 45, 95%: 1.502, 99%: 1.642, max_rt: 1.642, 41|0.836, 5|0.487, 5|6939.059, 4|320.956
+ 110, trx: 25, 95%: 1.564, 99%: 1.733, max_rt: 1.733, 26|0.913, 2|0.350, 2|1979.469, 3|316.694
+ 120, trx: 56, 95%: 1.556, 99%: 1.597, max_rt: 1.664, 55|0.925, 6|0.453, 6|6289.126, 5|318.749
+ 130, trx: 27, 95%: 1.619, 99%: 1.630, max_rt: 1.630, 28|0.842, 2|0.310, 3|5860.619, 3|318.965
+ 140, trx: 26, 95%: 1.563, 99%: 1.670, max_rt: 1.670, 28|0.854, 3|0.534, 2|5909.863, 2|319.806
+ 150, trx: 23, 95%: 1.481, 99%: 1.525, max_rt: 1.525, 20|0.606, 2|0.331, 2|6461.472, 3|318.071
+ 160, trx: 66, 95%: 1.571, 99%: 1.617, max_rt: 1.769, 66|0.902, 6|0.700, 7|6901.879, 6|321.808
+ 170, trx: 22, 95%: 1.577, 99%: 1.621, max_rt: 1.621, 19|0.657, 2|0.316, 2|6296.522, 3|318.718
+ 180, trx: 63, 95%: 1.523, 99%: 1.548, max_rt: 1.664, 67|0.902, 7|0.532, 6|1985.806, 6|319.392
+ 190, trx: 50, 95%: 1.596, 99%: 1.750, max_rt: 1.750, 50|0.941, 5|0.746, 6|4854.235, 5|317.421
+ 200, trx: 10, 95%: 1.574, 99%: 1.574, max_rt: 1.574, 11|0.741, 1|0.537, 1|5073.911, 1|280.413
+ 210, trx: 38, 95%: 1.617, 99%: 1.662, max_rt: 1.662, 37|0.608, 4|0.325, 3|6074.954, 3|306.733
+ 220, trx: 27, 95%: 1.601, 99%: 1.613, max_rt: 1.613, 30|0.775, 3|0.396, 4|6674.858, 3|321.253
+ 230, trx: 67, 95%: 1.547, 99%: 1.622, max_rt: 1.622, 65|0.932, 6|0.772, 6|1133.676, 8|320.171
+ 240, trx: 40, 95%: 1.532, 99%: 1.626, max_rt: 1.625, 38|0.817, 4|0.409, 4|5438.434, 3|316.524
+
+STOPPING THREADS
+ ----------------------
+neword: timing = 2932542075 nanoseconds
+payment: timing = 994751178 nanoseconds
+ordstat: timing = 87394155 nanoseconds
+delivery: timing = 808056134187 nanoseconds
+slev: timing = 78927987816 nanoseconds
+About to close database, tables accessed = 10
+Table history, counter = 5216
+Table order_line, counter = 8402012
+Table stock, counter = 52020
+Table item, counter = 26010
+Table new_orders, counter = 422818
+Table orders, counter = 840679
+Table district, counter = 10695
+Table warehouse, counter = 7825
+Table customer, counter = 430383
+Table sqlite_master, counter = 28
+.
+
+<Raw Results>
+  [0] sc:904 lt:0  rt:0  fl:0 avg_rt: 3.2 (5)
+  [1] sc:902 lt:0  rt:0  fl:0 avg_rt: 1.1 (5)
+  [2] sc:91 lt:0  rt:0  fl:0 avg_rt: 1.0 (5)
+  [3] sc:0 lt:91  rt:0  fl:0 avg_rt: 8879.7 (80)
+  [4] sc:0 lt:90  rt:0  fl:0 avg_rt: 877.0 (20)
+ in 240 sec.
+
+<Raw Results2(sum ver.)>
+  [0] sc:904  lt:0  rt:0  fl:0 
+  [1] sc:902  lt:0  rt:0  fl:0 
+  [2] sc:91  lt:0  rt:0  fl:0 
+  [3] sc:0  lt:91  rt:0  fl:0 
+  [4] sc:0  lt:90  rt:0  fl:0 
+
+<Constraint Check> (all must be [OK])
+ [transaction percentage]
+        Payment: 43.41% (>=43.0%) [OK]
+   Order-Status: 4.38% (>= 4.0%) [OK]
+       Delivery: 4.38% (>= 4.0%) [OK]
+    Stock-Level: 4.33% (>= 4.0%) [OK]
+ [response time (at least 90% passed)]
+      New-Order: 100.00%  [OK]
+        Payment: 100.00%  [OK]
+   Order-Status: 100.00%  [OK]
+       Delivery: 0.00%  [NG] *
+    Stock-Level: 0.00%  [NG] *
+success[4] = 0, late[4] = 90
+
+<TpmC>
+                 226.000 TpmC
+
+Time taken
+                 902.860 seconds
+warehouse number is 4, num_on_pmem is 0

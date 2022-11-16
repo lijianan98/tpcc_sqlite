@@ -71,6 +71,8 @@ int driver (int t_num)
 	    break;
     case 1:
 	    START_TIMING(payment_t, payment_time);
+	    // debug
+	    //printf("t_num = %d\n", t_num);
 	    do_payment(t_num);
 	    END_TIMING(payment_t, payment_time);	      
 	    break;
@@ -252,6 +254,10 @@ static int do_payment (int t_num)
     for (i = 0; i < MAX_RETRY; i++) {
       ret = payment(t_num, w_id, d_id, byname, c_w_id, c_d_id, c_id, c_last, h_amount);
       clk2 = clock_gettime(CLOCK_MONOTONIC, &tbuf2 );
+
+
+	// debug
+    	//printf("t_num = %d, ret of payment = %d, counting_on = %d\n", t_num, ret, counting_on);
 
       if(ret){
 

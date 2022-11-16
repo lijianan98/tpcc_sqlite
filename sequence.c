@@ -54,6 +54,7 @@ void seq_init( int n, int p, int o, int d, int s )
   os = o;
   dl = d;
   sl = s;
+  printf("seq_init with %d %d %d %d %d\n", n, p, o, d, s);
   total = n + p + o + d + s;
   seq = malloc( sizeof(int) * total );
   shuffle();
